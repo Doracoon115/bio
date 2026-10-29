@@ -1,0 +1,178 @@
+# Pages CMS 설정 (https://pagescms.org)
+# 여기 적힌 항목만 CMS 화면에서 수정할 수 있습니다. 실제 내용은 data/*.json 에 저장됩니다.
+
+media:
+  input: img
+  output: img
+
+content:
+  # ---------- Home ----------
+  - name: about
+    label: 연구실 소개
+    type: file
+    path: data/about.json
+    format: json
+    fields:
+      - name: body
+        label: 소개글 (문단마다 줄이 나뉘어 표시됩니다)
+        type: rich-text
+      - name: image
+        label: 소개 그림
+        type: image
+      - name: image_alt
+        label: 그림 설명 (대체 텍스트)
+        type: string
+
+  - name: recruit
+    label: 대학원생 · 학부연구생 모집
+    type: file
+    path: data/recruit.json
+    format: json
+    fields:
+      - name: items
+        label: 이런 학생을 찾습니다
+        type: string
+        list: true
+      - name: call
+        label: 맺음말
+        type: rich-text
+
+  # ---------- Professor ----------
+  - name: professor
+    label: 지도교수
+    type: file
+    path: data/professor.json
+    format: json
+    fields:
+      - { name: name, label: 이름, type: string }
+      - { name: en, label: 영문 이름, type: string }
+      - { name: photo, label: 사진, type: image }
+      - { name: position, label: 소속 · 직위 (줄바꿈 그대로 표시), type: text }
+      - name: contacts
+        label: 연락처
+        type: object
+        list: true
+        fields:
+          - { name: label, label: 항목 (예 Tel), type: string }
+          - { name: value, label: 내용, type: string }
+      - name: links
+        label: 외부 링크
+        type: object
+        list: true
+        fields:
+          - { name: label, label: 이름, type: string }
+          - { name: url, label: 주소, type: string }
+      - name: education
+        label: 학력 (Education)
+        type: object
+        list: true
+        fields:
+          - { name: yr, label: 연도, type: string }
+          - { name: text, label: 내용, type: string }
+          - { name: en, label: 영문 설명 (선택), type: string }
+      - name: career
+        label: 주요 경력 (Career)
+        type: object
+        list: true
+        fields:
+          - { name: yr, label: 연도, type: string }
+          - { name: text, label: 내용, type: string }
+          - { name: en, label: 영문 설명 (선택), type: string }
+      - name: awards
+        label: 수상 (Awards)
+        type: object
+        list: true
+        fields:
+          - { name: yr, label: 연도, type: string }
+          - { name: text, label: 내용, type: string }
+          - { name: en, label: 영문 설명 (선택), type: string }
+
+  # ---------- Publications ----------
+  - name: publications
+    label: 연구실적
+    type: file
+    path: data/publications.json
+    format: json
+    fields:
+      - name: papers
+        label: 논문 (* = 교신저자)
+        type: object
+        list: true
+        fields:
+          - { name: y, label: 연도, type: number }
+          - { name: t, label: 제목, type: string }
+          - { name: a, label: 저자, type: text }
+          - { name: j, label: 저널, type: string }
+          - { name: url, label: DOI 주소, type: string }
+          - { name: idx, label: 색인 (예 SCIE · SCOPUS), type: string }
+          - name: topic
+            label: 분야
+            type: select
+            options:
+              values:
+                - { value: seed, label: 종자 생리 }
+                - { value: metabolite, label: 기능성 대사물질 }
+                - { value: other, label: 기타 }
+      - name: patents
+        label: 특허 · 기술이전
+        type: object
+        list: true
+        fields:
+          - name: kind
+            label: 구분
+            type: select
+            options:
+              values: [등록특허, 공개특허, 기술이전]
+          - { name: title, label: 제목, type: string }
+          - { name: url, label: 링크 (선택), type: string }
+          - { name: info, label: 연도 · 번호 / 기관, type: string }
+
+  # ---------- Members ----------
+  - name: members
+    label: 구성원 · 졸업생
+    type: file
+    path: data/members.json
+    format: json
+    fields:
+      - name: groups
+        label: 재학생 과정별 묶음
+        type: object
+        list: true
+        fields:
+          - { name: group, label: 과정 이름, type: string }
+          - name: list
+            label: 구성원
+            type: object
+            list: true
+            fields:
+              - { name: ko, label: 이름, type: string }
+              - { name: en, label: 영문 이름, type: string }
+              - { name: role, label: 역할, type: string }
+              - { name: desc, label: 소개 (선택), type: text }
+      - name: alumni
+        label: 졸업생 (위에서 아래로 입학 순서, 화면에는 최근 순으로 표시)
+        type: object
+        list: true
+        fields:
+          - { name: n, label: 이름, type: string }
+          - { name: note, label: 비고 (예 석사 2026.02), type: string }
+
+  # ---------- News ----------
+  - name: news
+    label: 연구실 소식
+    type: file
+    path: data/news.json
+    format: json
+    fields:
+      - name: posts
+        label: 소식
+        type: object
+        list: true
+        fields:
+          - { name: title, label: 제목, type: string }
+          - { name: date, label: 날짜, type: date }
+          - { name: body, label: 내용, type: text }
+          - name: images
+            label: 사진
+            type: image
+            list: true

@@ -11,8 +11,8 @@ loadData('professor').then(P => {
         <div class="ext-links">${(P.links||[]).map(l => `<a class="chip" href="${esc(l.url)}">${esc(l.label)}</a>`).join('')}</div>
       </div>
       <div class="timeline">
-        <h4>학력 (Education)</h4>${tl(P.education)}
-        <h4>주요 경력 (Career)</h4>${tl(P.career)}
-        <h4>수상 (Awards)</h4>${tl(P.awards)}
+        <div class="tl-col"><h4>학력 (Education)</h4>${tl(P.education)}
+        <h4>수상 (Awards)</h4>${tl(P.awards)}</div>
+        <div class="tl-col"><h4>주요 경력 (Career)</h4>${tl(P.career)}</div>
       </div>`;
 });

@@ -1,6 +1,4 @@
 /* ===== 모든 페이지 공통 ===== */
-const PI_NAMES = ["김두현*","김두현"];
-
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* Pages CMS에서 수정하는 내용(data/*.json) 읽기 */
